@@ -1,10 +1,16 @@
 import React from 'react';
 
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'clayOutline';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+}
+
 /**
  * Komponen tombol bernuansa peta kertas hangat, tanah liat, dan tambak.
  * Memenuhi panduan desain: garis tipis, sudut kecil (rounded-md), target sentuh >= 44px.
  */
-export function Button({
+export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   size = 'md',
@@ -13,17 +19,17 @@ export function Button({
   className = '',
   onClick,
   ...props
-}) {
+}) => {
   const baseStyles =
     'inline-flex items-center justify-center font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 focus-visible:ring-offset-2 focus-visible:ring-offset-paper disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-md cursor-pointer';
 
-  const sizeStyles = {
+  const sizeStyles: Record<string, string> = {
     sm: 'text-xs px-3 py-2 min-h-[36px] gap-1.5',
     md: 'text-sm px-4 py-2.5 min-h-[44px] gap-2',
     lg: 'text-base px-6 py-3 min-h-[48px] gap-2.5',
   };
 
-  const variantStyles = {
+  const variantStyles: Record<string, string> = {
     primary:
       'bg-clay text-paper hover:bg-[#9E4520] active:bg-[#883B1A] border border-clay shadow-xs',
     secondary:
@@ -47,4 +53,4 @@ export function Button({
       {children}
     </button>
   );
-}
+};

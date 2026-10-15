@@ -3,24 +3,21 @@ import { useActiveSection } from '../../hooks/useActiveSection';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
+  { id: 'materi', label: 'Materi' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ];
 
-/**
- * Navbar sticky dengan tiga tautan: Home, About, Contact.
- * Menandai tautan aktif via IntersectionObserver dan mendukung toggle mobile menu.
- */
-export function Navbar() {
+export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const activeSection = useActiveSection(['home', 'about', 'contact'], 'home');
+  const activeSection = useActiveSection(['home', 'materi', 'about', 'contact'], 'home');
 
-  const handleNavClick = (e, id) => {
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
-      const topOffset = 70; // offset untuk tinggi navbar sticky
+      const topOffset = 64;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - topOffset;
       window.scrollTo({
@@ -34,7 +31,6 @@ export function Navbar() {
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-md border-b border-line transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Brand / Judul */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, 'home')}
@@ -42,11 +38,11 @@ export function Navbar() {
         >
           <span className="w-3 h-3 rounded-full bg-clay group-hover:scale-110 transition-transform"></span>
           <span className="font-serif font-bold text-lg tracking-tight">
-            Sidoarjo Memory Map
+            Peta Materi Sidoarjo
           </span>
         </a>
 
-        {/* Desktop Nav Items */}
+        {/* Desktop Nav: Home | Materi | About | Contact */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Navigasi Utama">
           {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.id;
@@ -71,7 +67,7 @@ export function Navbar() {
           })}
         </nav>
 
-        {/* Mobile Hamburger Toggle (Target sentuh >= 44px) */}
+        {/* Mobile Hamburger Toggle */}
         <div className="md:hidden">
           <button
             type="button"
@@ -93,7 +89,6 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-paper border-b border-line px-4 pt-2 pb-4 space-y-1 animate-in fade-in slide-in-from-top-2">
           {NAV_ITEMS.map((item) => {
@@ -118,4 +113,4 @@ export function Navbar() {
       )}
     </header>
   );
-}
+};

@@ -1,18 +1,27 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
+export interface RevealProps {
+  children: React.ReactNode;
+  delay?: number;
+  duration?: number;
+  yOffset?: number;
+  className?: string;
+  as?: 'div' | 'section' | 'article' | 'span';
+}
+
 /**
  * Wrapper animasi muncul saat elemen masuk viewport.
  * Mematuhi prinsip: fade + naik 12-20px sekali saja, transform & opacity saja, respect reduced-motion.
  */
-export function Reveal({
+export const Reveal: React.FC<RevealProps> = ({
   children,
   delay = 0,
   duration = 0.6,
   yOffset = 18,
   className = '',
   as = 'div',
-}) {
+}) => {
   const shouldReduceMotion = useReducedMotion();
 
   if (shouldReduceMotion) {
@@ -37,4 +46,4 @@ export function Reveal({
       {children}
     </MotionComponent>
   );
-}
+};

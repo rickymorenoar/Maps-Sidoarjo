@@ -22,18 +22,15 @@ html, body {
   min-height: 100vh;
 }
 
-/* Custom Leaflet Map styling to blend with paper aesthetic */
+/* Leaflet container: pastikan ukuran terhitung penuh dan z-index aman */
 .leaflet-container {
   font-family: var(--font-sans) !important;
-  background-color: #E8E2D5 !important;
-  width: 100%;
-  height: 100%;
+  background-color: #EFE9DF !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 440px;
   outline: none;
-}
-
-/* Leaflet Tile Layer warmth tint */
-.leaflet-tile {
-  filter: contrast(96%) brightness(98%) sepia(8%);
+  z-index: 1;
 }
 
 /* Custom Marker Styles */
@@ -114,15 +111,15 @@ html, body {
   color: var(--color-ink) !important;
   border: 1px solid var(--color-line) !important;
   border-radius: 6px !important;
-  box-shadow: 0 4px 16px rgba(30, 42, 46, 0.08) !important;
+  box-shadow: 0 4px 16px rgba(30, 42, 46, 0.12) !important;
   padding: 0 !important;
 }
 
 .leaflet-popup-content {
-  margin: 14px 16px !important;
+  margin: 12px 14px !important;
   line-height: 1.5 !important;
-  min-width: 200px;
-  max-width: 280px;
+  min-width: 220px;
+  max-width: 300px;
 }
 
 .leaflet-popup-tip {

@@ -3,24 +3,33 @@ import emailjs from '@emailjs/browser';
 import { Button } from '../ui/Button';
 import { Reveal } from '../ui/Reveal';
 
-/**
- * Section Contact: Form pengiriman pesan ke email pemilik via @emailjs/browser.
- * Mendukung honeypot field, validasi email & pesan, serta status idle | sending | success | error.
- */
-export function Contact() {
-  const [formData, setFormData] = useState({
+interface FormDataState {
+  name: string;
+  email: string;
+  message: string;
+  honeypot: string;
+}
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
+export const Contact: React.FC = () => {
+  const [formData, setFormData] = useState<FormDataState>({
     name: '',
     email: '',
     message: '',
-    honeypot: '', // honeypot field tersembunyi
+    honeypot: '',
   });
 
-  const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
-  const [statusMessage, setStatusMessage] = useState('');
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState<string>('');
 
-  const validate = () => {
-    const errs = {};
+  const validate = (): FormErrors => {
+    const errs: FormErrors = {};
     if (!formData.name.trim()) {
       errs.name = 'Nama lengkap wajib diisi.';
     }
@@ -37,21 +46,20 @@ export function Contact() {
     return errs;
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
     if (status !== 'idle' && status !== 'sending') {
       setStatus('idle');
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Deteksi bot via honeypot
     if (formData.honeypot) {
       setStatus('success');
       setStatusMessage('Pesan Anda telah diterima.');
@@ -71,7 +79,6 @@ export function Contact() {
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    // Jika kredensial belum diisi di environment
     if (!serviceId || !templateId || !publicKey) {
       setTimeout(() => {
         setStatus('success');
@@ -125,7 +132,6 @@ export function Contact() {
             <div className="bg-[#FAF7F2] border border-line rounded-md p-6 sm:p-8 shadow-xs">
               <form onSubmit={handleSubmit} noValidate>
                 
-                {/* Honeypot field (tersembunyi dari pengguna biasa, penahan bot sederhana) */}
                 <div className="sr-only" aria-hidden="true">
                   <label htmlFor="contact-honeypot">Jangan isi kolom ini jika Anda manusia</label>
                   <input
@@ -139,7 +145,6 @@ export function Contact() {
                   />
                 </div>
 
-                {/* Nama */}
                 <div className="mb-4">
                   <label
                     htmlFor="contact-name"
@@ -167,7 +172,6 @@ export function Contact() {
                   )}
                 </div>
 
-                {/* Email Pengirim */}
                 <div className="mb-4">
                   <label
                     htmlFor="contact-email"
@@ -195,7 +199,6 @@ export function Contact() {
                   )}
                 </div>
 
-                {/* Pesan */}
                 <div className="mb-5">
                   <label
                     htmlFor="contact-message"
@@ -223,7 +226,6 @@ export function Contact() {
                   )}
                 </div>
 
-                {/* Status Message (aria-live) */}
                 {statusMessage && (
                   <div
                     aria-live="polite"
@@ -246,7 +248,6 @@ export function Contact() {
                   </div>
                 )}
 
-                {/* Tombol Kirim */}
                 <Button
                   type="submit"
                   variant="primary"
@@ -280,4 +281,4 @@ export function Contact() {
       </div>
     </section>
   );
-}
+};

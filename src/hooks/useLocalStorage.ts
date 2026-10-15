@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 /**
- * Custom hook untuk membaca dan menyimpan data ke localStorage dengan aman.
- * @template T
- * @param {string} key Kunci localStorage
- * @param {T} initialValue Nilai fallback jika data kosong atau corrupt
- * @returns {[T, (value: T | ((prev: T) => T)) => void]}
+ * Custom hook untuk membaca dan menyimpan data ke localStorage dengan aman dan typed.
  */
-export function useLocalStorage(key, initialValue) {
-  const [storedValue, setStoredValue] = useState(() => {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T
+): [T, Dispatch<SetStateAction<T>>] {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       if (typeof window === 'undefined') {
         return initialValue;

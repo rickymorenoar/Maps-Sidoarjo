@@ -2,20 +2,16 @@ import { useState, useEffect } from 'react';
 
 /**
  * Custom hook untuk mendeteksi section mana yang sedang aktif di viewport menggunakan IntersectionObserver.
- * 
- * @param {string[]} sectionIds Daftar ID elemen section (contoh: ['home', 'about', 'contact'])
- * @param {string} initialSection ID awal yang aktif
- * @returns {string} ID section yang sedang aktif
  */
-export function useActiveSection(sectionIds, initialSection = 'home') {
-  const [activeSection, setActiveSection] = useState(initialSection);
+export function useActiveSection(sectionIds: string[], initialSection = 'home'): string {
+  const [activeSection, setActiveSection] = useState<string>(initialSection);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
       return;
     }
 
-    const visibleSections = new Map();
+    const visibleSections = new Map<string, number>();
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -27,7 +23,6 @@ export function useActiveSection(sectionIds, initialSection = 'home') {
           }
         });
 
-        // Pilih section dengan intersection ratio terbesar di viewport
         let highestRatio = -1;
         let mostVisibleId = '';
 
