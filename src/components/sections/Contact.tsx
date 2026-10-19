@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Button } from '../ui/Button';
 import { Reveal } from '../ui/Reveal';
+import { EMAILJS_CONFIG } from '../../lib/emailConfig';
 
 interface FormDataState {
   name: string;
@@ -75,15 +76,17 @@ export const Contact: React.FC = () => {
     setStatus('sending');
     setStatusMessage('');
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    // Baca kunci langsung dari EMAILJS_CONFIG (atau fallback ke env jika ada)
+    const serviceId = EMAILJS_CONFIG.serviceId || import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = EMAILJS_CONFIG.templateId || import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = EMAILJS_CONFIG.publicKey || import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
+    // Jika kunci belum diisi di kode
     if (!serviceId || !templateId || !publicKey) {
       setTimeout(() => {
         setStatus('success');
         setStatusMessage(
-          'Pesan Anda berhasil dicatat secara lokal (Kredensial EmailJS belum diisi di .env, mode pratinjau aktif).'
+          'Pesan Anda berhasil dicatat secara lokal (Kunci EmailJS belum dimasukkan di src/lib/emailConfig.ts, mode pratinjau aktif).'
         );
         setFormData({ name: '', email: '', message: '', honeypot: '' });
       }, 700);
@@ -91,20 +94,33 @@ export const Contact: React.FC = () => {
     }
 
     try {
+      const now = new Date();
       const templateParams = {
-        from_name: formData.name.trim(),
-        from_email: formData.email.trim(),
+        name: formData.name.trim(),
+        email: formData.email.trim(),
         message: formData.message.trim(),
+        title: `Pesan dari ${formData.name.trim()}`,
+        time: now.toLocaleString('id-ID', {
+          dateStyle: 'long',
+          timeStyle: 'short',
+          timeZone: 'Asia/Jakarta',
+        }),
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
       setStatus('success');
-      setStatusMessage('Terima kasih! Pesan dan cerita Anda telah terkirim ke kurator.');
+      setStatusMessage('Terima kasih! Pesan Anda telah berhasil terkirim ke email pengelola.');
       setFormData({ name: '', email: '', message: '', honeypot: '' });
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('EmailJS Error:', err);
+      const errMsg =
+        err && typeof err === 'object' && 'text' in err
+          ? String((err as { text: unknown }).text)
+          : err instanceof Error
+          ? err.message
+          : 'Unknown error';
       setStatus('error');
-      setStatusMessage('Gagal mengirim pesan melalui EmailJS. Silakan periksa koneksi atau coba beberapa saat lagi.');
+      setStatusMessage(`Gagal mengirim: ${errMsg}`);
     }
   };
 
@@ -119,10 +135,10 @@ export const Contact: React.FC = () => {
               <span>Hubungi Pengelola</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-3">
-              Kirimkan Kisah atau Saran
+              Kirimkan Pesan atau Usulan Materi
             </h2>
             <p className="text-sm text-ink/75 leading-relaxed font-sans max-w-lg mx-auto">
-              Punya usulan toponimi baru, catatan arsip masa lampau, atau ingin berkolaborasi merawat ingatan Sidoarjo? Tuliskan pesan Anda kepada kami.
+              Memiliki modul pembelajaran, data materi kecamatan yang perlu ditambahkan, atau pertanyaan seputar platform? Tuliskan pesan Anda kepada kami.
             </p>
           </Reveal>
         </div>
@@ -212,7 +228,7 @@ export const Contact: React.FC = () => {
                     rows={5}
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Sampaikan cerita, kritik, atau usulan titik sejarah Sidoarjo yang belum terdata..."
+                    placeholder="Sampaikan pesan, saran, atau usulan materi untuk kecamatan di Sidoarjo..."
                     className={`w-full bg-paper border ${
                       errors.message ? 'border-red-500 ring-1 ring-red-400' : 'border-line hover:border-ink/30 focus:border-clay'
                     } rounded-md p-3.5 text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-1 focus:ring-clay/40 transition-colors resize-y leading-relaxed`}
@@ -268,7 +284,7 @@ export const Contact: React.FC = () => {
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
-                      <span>Kirim Pesan ke Kurator</span>
+                      <span>Kirim Pesan ke Pengelola</span>
                     </span>
                   )}
                 </Button>
