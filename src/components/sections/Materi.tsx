@@ -14,7 +14,7 @@ export const Materi: React.FC<MateriProps> = ({ onOpenDetail }) => {
   return (
     <section id="materi" className="py-16 md:py-24 border-t border-line bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Section Materi */}
         <div className="max-w-3xl mb-8 md:mb-12">
           <Reveal>

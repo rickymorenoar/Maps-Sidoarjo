@@ -5,6 +5,24 @@ import { CategoryItem } from '../types/memory';
  */
 export const CATEGORIES: CategoryItem[] = [
   {
+    name: 'Seni Budaya & Tradisi',
+    color: '#9C3D28',
+    keywords: [
+      'ludruk',
+      'tari',
+      'reog',
+      'nyadran',
+      'lelang bandeng',
+      'tari ujung',
+      'pepelegi lawas',
+      'gotong royong',
+      'tradisi',
+      'ruwah desa',
+      'tumpeng',
+      'budaya',
+    ],
+  },
+  {
     name: 'Sejarah & Cagar Budaya',
     color: '#7D4F27',
     keywords: [

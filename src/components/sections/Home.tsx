@@ -34,28 +34,12 @@ export const Home: React.FC = () => {
 
   const scrollToMateri = () => {
     const el = document.getElementById('materi');
-    if (el) {
-      const topOffset = 64;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - topOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const scrollToAbout = () => {
     const el = document.getElementById('about');
-    if (el) {
-      const topOffset = 64;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - topOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (

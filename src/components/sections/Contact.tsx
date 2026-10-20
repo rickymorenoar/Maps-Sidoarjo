@@ -127,7 +127,7 @@ export const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-20 md:py-28 border-t border-line bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="max-w-2xl mx-auto text-center mb-12">
           <Reveal>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/25 text-xs font-medium tracking-wide mb-3">

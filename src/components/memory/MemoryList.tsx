@@ -151,6 +151,13 @@ export const MemoryList: React.FC<MemoryListProps> = ({
                   {mem.title}
                 </h4>
 
+                {/* Koordinat Grafis Sesuai Materi */}
+                <div className="mb-1.5 flex flex-wrap items-center gap-1">
+                  <span className="text-[10px] font-mono text-clay font-medium bg-[#F5EFE6] px-1.5 py-0.5 rounded border border-line/60">
+                    {mem.koordinatText || `Koordinat: ${mem.location?.lat}, ${mem.location?.lng}`}
+                  </span>
+                </div>
+
                 <p className="text-xs text-ink/75 line-clamp-2 leading-relaxed mb-2">
                   {mem.content}
                 </p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MemoryMap } from './MemoryMap';
 import { MemoryList } from './MemoryList';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -14,12 +14,31 @@ export interface MemoryAppProps {
  * MemoryApp: Menampilkan peta materi dan daftar materi per kecamatan.
  */
 export const MemoryApp: React.FC<MemoryAppProps> = ({ onOpenDetail }) => {
-  const [memories] = useLocalStorage<MateriItem[]>(
+  const [memories, setMemories] = useLocalStorage<MateriItem[]>(
     STORAGE_KEY_MATERI,
     SEED_MEMORIES
   );
   const [selectedMemory, setSelectedMemory] = useState<MateriItem | null>(null);
   const [flyTarget, setFlyTarget] = useState<FlyTarget | null>(null);
+
+  // Pastikan dataset selalu lengkap 18 kecamatan (22 titik materi) dan bersihkan cache lama
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('sidoarjo_memories');
+      window.localStorage.removeItem('sidoarjo_materi_kecamatan_v1');
+      window.localStorage.removeItem('sidoarjo_materi_kecamatan_v2');
+      window.localStorage.removeItem('sidoarjo_materi_kecamatan_v3');
+
+      const raw = window.localStorage.getItem(STORAGE_KEY_MATERI);
+      if (!raw || JSON.parse(raw).length < SEED_MEMORIES.length) {
+        window.localStorage.setItem(STORAGE_KEY_MATERI, JSON.stringify(SEED_MEMORIES));
+        setMemories(SEED_MEMORIES);
+      }
+    }
+  }, [setMemories]);
+
+  // Gunakan SEED_MEMORIES jika state lokal belum terbarui
+  const activeMemories = memories && memories.length >= SEED_MEMORIES.length ? memories : SEED_MEMORIES;
 
   const handleSelectMemory = (memory: MateriItem) => {
     setSelectedMemory(memory);
@@ -39,7 +58,7 @@ export const MemoryApp: React.FC<MemoryAppProps> = ({ onOpenDetail }) => {
         <div className="lg:col-span-7 xl:col-span-8 order-1">
           <div className="sticky top-20">
             <MemoryMap
-              memories={memories}
+              memories={activeMemories}
               selectedMemory={selectedMemory}
               flyTarget={flyTarget}
               onSelectMemory={handleSelectMemory}
@@ -57,7 +76,7 @@ export const MemoryApp: React.FC<MemoryAppProps> = ({ onOpenDetail }) => {
         {/* Kolom Kanan: Daftar Materi per Kecamatan */}
         <div className="lg:col-span-5 xl:col-span-4 order-2">
           <MemoryList
-            memories={memories}
+            memories={activeMemories}
             selectedMemory={selectedMemory}
             onSelectMemory={handleSelectMemory}
             onOpenDetail={onOpenDetail}

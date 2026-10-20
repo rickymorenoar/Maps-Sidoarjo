@@ -9,16 +9,20 @@ import { Footer } from './components/layout/Footer';
 import { MateriItem } from './types/memory';
 import { SEED_MEMORIES } from './data/seedMemories';
 
+import { useLocalStorage } from './hooks/useLocalStorage';
+import { STORAGE_KEY_MATERI } from './lib/constants';
+
 export default function App(): React.ReactElement {
+  const [memories] = useLocalStorage<MateriItem[]>(STORAGE_KEY_MATERI, SEED_MEMORIES);
+  const activeMemories = memories && memories.length >= SEED_MEMORIES.length ? memories : SEED_MEMORIES;
   const [selectedMateriDetail, setSelectedMateriDetail] = useState<MateriItem | null>(null);
 
-  // Navigasi URL hash untuk mendukung page detail materi & tombol back browser
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash.startsWith('#/materi/')) {
         const id = hash.replace('#/materi/', '');
-        const found = SEED_MEMORIES.find((m) => m.id === id);
+        const found = activeMemories.find((m) => m.id === id) || SEED_MEMORIES.find((m) => m.id === id);
         if (found) {
           setSelectedMateriDetail(found);
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -36,12 +40,12 @@ export default function App(): React.ReactElement {
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, []);
+  }, [activeMemories]);
 
   const handleOpenDetail = (materi: MateriItem) => {
     setSelectedMateriDetail(materi);
     window.location.hash = `#/materi/${materi.id}`;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo(0, 0);
   };
 
   const handleBackToMap = () => {
@@ -49,11 +53,7 @@ export default function App(): React.ReactElement {
     window.location.hash = '#materi';
     setTimeout(() => {
       const el = document.getElementById('materi');
-      if (el) {
-        const topOffset = 64;
-        const pos = el.getBoundingClientRect().top + window.pageYOffset - topOffset;
-        window.scrollTo({ top: pos, behavior: 'smooth' });
-      }
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
   };
 
@@ -68,7 +68,7 @@ export default function App(): React.ReactElement {
             materi={selectedMateriDetail}
             onBack={handleBackToMap}
             onSelectOtherMateri={handleOpenDetail}
-            allMemories={SEED_MEMORIES}
+            allMemories={memories}
           />
         ) : (
           /* Halaman Utama: Home | Materi (Peta Terkunci Sidoarjo) | About | Contact */

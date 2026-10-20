@@ -18,9 +18,9 @@ export interface MateriItem {
   category: string;
   location: LocationPoint;
   createdAt: number;
-  summary?: string;
-  keyPoints?: string[];
-  historicalContext?: string;
+  source?: string;
+  address?: string;
+  koordinatText?: string;
 }
 
 // Alias untuk kompatibilitas kode

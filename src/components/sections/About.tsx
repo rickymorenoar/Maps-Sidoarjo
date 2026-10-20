@@ -5,7 +5,7 @@ export const About: React.FC = () => {
   return (
     <section id="about" className="py-20 md:py-28 border-t border-line bg-[#FAF7F2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Section */}
         <div className="max-w-2xl mb-14 md:mb-20">
           <Reveal>
