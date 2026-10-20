@@ -102,7 +102,7 @@ export const Navbar: React.FC = () => {
             }}
           />
           <span className="font-serif font-bold text-lg tracking-tight">
-            Peta Materi Sidoarjo
+            Memory Map Sidoarjo
           </span>
         </a>
 
