@@ -34,6 +34,11 @@ html, body {
   z-index: 1;
 }
 
+/* Sembunyikan watermark dan teks atribusi Leaflet */
+.leaflet-control-attribution {
+  display: none !important;
+}
+
 /* Custom Marker Styles */
 .custom-memory-marker {
   display: flex;

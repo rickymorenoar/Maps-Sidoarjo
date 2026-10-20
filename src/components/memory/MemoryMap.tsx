@@ -110,12 +110,13 @@ export const MemoryMap: React.FC<MemoryMapProps> = ({
         maxBounds={SIDOARJO_BOUNDS}
         maxBoundsViscosity={1.0}
         scrollWheelZoom={true}
+        attributionControl={false}
         style={{ width: '100%', height: '100%', minHeight: '440px' }}
       >
         <MapResizeHandler />
 
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'
+          
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           maxZoom={19}
         />
