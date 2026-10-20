@@ -89,20 +89,20 @@ export const Navbar: React.FC = () => {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, 'home')}
-          className="flex items-center gap-2.5 text-ink hover:text-clay transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 rounded-sm cursor-pointer"
+          className="flex items-center gap-3 text-ink hover:text-clay transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 rounded-sm cursor-pointer py-1"
         >
           <img
-            src="/logo-sekolah.png"
+            src="/logo.webp"
             alt="Logo Sekolah"
-            className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-md group-hover:scale-105 transition-transform shrink-0"
+            className="w-11 h-11 sm:w-12 sm:h-12 object-contain rounded-md group-hover:scale-105 transition-transform shrink-0 drop-shadow-xs"
             onError={(e) => {
-              // Fallback otomatis ke logo-sekolah.svg jika logo-sekolah.png belum ditaruh
+              // Fallback jika logo.webp tidak ditemukan
               e.currentTarget.onerror = null;
-              e.currentTarget.src = '/logo-sekolah.webp';
+              e.currentTarget.src = '/logo-sekolah.png';
             }}
           />
           <span className="font-serif font-bold text-lg tracking-tight">
-            Memory Map Sidoarjo
+            Sidoarjo Memory Map
           </span>
         </a>
 
