@@ -85,13 +85,22 @@ export const Navbar: React.FC = () => {
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-md border-b border-line shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Brand Logo */}
+        {/* Brand Logo & Foto Logo Sekolah */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, 'home')}
           className="flex items-center gap-2.5 text-ink hover:text-clay transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 rounded-sm cursor-pointer"
         >
-          <span className="w-3 h-3 rounded-full bg-clay group-hover:scale-110 transition-transform"></span>
+          <img
+            src="/logo-sekolah.png"
+            alt="Logo Sekolah"
+            className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-md group-hover:scale-105 transition-transform shrink-0"
+            onError={(e) => {
+              // Fallback otomatis ke logo-sekolah.svg jika logo-sekolah.png belum ditaruh
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/logo-sekolah.webp';
+            }}
+          />
           <span className="font-serif font-bold text-lg tracking-tight">
             Peta Materi Sidoarjo
           </span>
