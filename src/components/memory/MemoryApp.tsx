@@ -28,6 +28,9 @@ export const MemoryApp: React.FC<MemoryAppProps> = ({ onOpenDetail }) => {
       window.localStorage.removeItem('sidoarjo_materi_kecamatan_v1');
       window.localStorage.removeItem('sidoarjo_materi_kecamatan_v2');
       window.localStorage.removeItem('sidoarjo_materi_kecamatan_v3');
+      window.localStorage.removeItem('sidoarjo_materi_kecamatan_v4');
+      window.localStorage.removeItem('sidoarjo_materi_kecamatan_v5');
+      window.localStorage.removeItem('sidoarjo_materi_kecamatan_v6');
 
       const raw = window.localStorage.getItem(STORAGE_KEY_MATERI);
       if (!raw || JSON.parse(raw).length < SEED_MEMORIES.length) {
@@ -65,7 +68,7 @@ export const MemoryApp: React.FC<MemoryAppProps> = ({ onOpenDetail }) => {
               onOpenDetail={onOpenDetail}
             />
             <div className="mt-2.5 flex items-center justify-between text-xs text-ink/60 px-1">
-              <span>Klik penanda pada peta untuk langsung membuka halaman materi lengkap.</span>
+              <span>Klik penanda titik pada peta untuk memunculkan kotak cuplikan materi.</span>
               <span className="hidden sm:inline text-clay font-medium">
                 Peta Terkunci: Wilayah Kab. Sidoarjo
               </span>

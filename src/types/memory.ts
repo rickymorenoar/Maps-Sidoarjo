@@ -21,6 +21,7 @@ export interface MateriItem {
   source?: string;
   address?: string;
   koordinatText?: string;
+  imageUrl?: string;
 }
 
 // Alias untuk kompatibilitas kode

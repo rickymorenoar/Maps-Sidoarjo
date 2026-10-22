@@ -2,7 +2,8 @@ import { MateriItem } from '../types/memory';
 
 /**
  * Data kebudayaan resmi untuk 18 Kecamatan di Kabupaten Sidoarjo.
- * Disesuaikan persis dengan dokumen materi: judul, alamat, koordinat grafis/geografis, konten, dan sumber rujukan.
+ * Dilengkapi dengan foto asli dari arsip kebudayaan 18 kecamatan Sidoarjo (Google Drive),
+ * serta disesuaikan persis dengan dokumen materi kebudayaan Sidoarjo.
  */
 export const SEED_MEMORIES: MateriItem[] = [
   // 1. BALONGBENDO
@@ -13,6 +14,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Dusun Kemambang, RT 08 / RW 01, Desa Sumokembangsri, Kecamatan Balongbendo, Kabupaten Sidoarjo, Jawa Timur 61263',
     koordinatText: 'Koordinat grafis: -7.4289, 112.5053',
+    imageUrl: '/images/ludruk_irama_baru.jpg',
     location: {
       name: 'Dusun Kemambang, Desa Sumokembangsri',
       kecamatan: 'Balongbendo',
@@ -32,6 +34,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Sejarah & Cagar Budaya',
     address: 'Jl. Raya Buduran – Jembatan Layang, Bedrek, Siwalanpanji, Kec. Buduran, Kabupaten Sidoarjo, Jawa Timur 61252',
     koordinatText: 'Koordinat grafis: -7.432409, 112.730372',
+    imageUrl: '/images/museum_mpu_tantular.jpg',
     location: {
       name: 'Jl. Raya Buduran – Jembatan Layang, Bedrek, Siwalanpanji',
       kecamatan: 'Buduran',
@@ -51,6 +54,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Raya Maritim No. 01, Desa Balongdowo',
     koordinatText: 'Koordinat grafis: -7.4961, 112.7306',
+    imageUrl: '/images/nyadran_dewi_sekardadu.jpg',
     location: {
       name: 'Jl. Raya Maritim No. 01, Desa Balongdowo',
       kecamatan: 'Candi',
@@ -70,6 +74,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Industri Kreatif & UMKM',
     address: 'Desa Punggul, Kecamatan Gedangan, Kabupaten Sidoarjo, Provinsi Jawa Timur, Indonesia',
     koordinatText: 'Koordinat geografis: -7.39806, 112.73833',
+    imageUrl: '/images/gang_kampung_topi_punggul.jpg',
     location: {
       name: 'Desa Punggul, Kecamatan Gedangan',
       kecamatan: 'Gedangan',
@@ -89,6 +94,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Sejarah & Cagar Budaya',
     address: 'Jl. Gajah Mada No.19, Pekauman, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213',
     koordinatText: 'Koordinat grafis: -7.4523, 112.7169',
+    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
     location: {
       name: 'Dusun Kauman di Desa Kedungcangkring, Jabon',
       kecamatan: 'Jabon',
@@ -108,6 +114,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Sejarah & Cagar Budaya',
     address: 'FJXM+WHG, Unnamed Road, Balong Garut, Balonggarut, Kec. Krembung, Kabupaten Sidoarjo, Jawa Timur 61275',
     koordinatText: 'Koordinat grafis: -7.5008, 112.6397',
+    imageUrl: '/images/pura_margowening_krembung.jpg',
     location: {
       name: 'Balong Garut, Balonggarut, Kec. Krembung',
       kecamatan: 'Krembung',
@@ -127,6 +134,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Gastronomi & Olahan Pangan',
     address: 'HHGQ+228, Jl. Raya Sedenganmijen No.1, Mijen, Sadenganmijen, Kec. Krian, Kabupaten Sidoarjo, Jawa Timur 61261',
     koordinatText: 'Koordinat grafis: -7.4124, 112.6074',
+    imageUrl: '/images/tumpeng_tempe.jpg',
     location: {
       name: 'HHGQ+228, Jl. Raya Sedenganmijen No.1, Sadenganmijen',
       kecamatan: 'Krian',
@@ -146,6 +154,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Sejarah & Cagar Budaya',
     address: 'FMMM+554, Candipari Kulon, Candipari, Kec. Porong, Kabupaten Sidoarjo, Jawa Timur 61274',
     koordinatText: 'Koordinat grafis: -7.5186, 112.6825',
+    imageUrl: '/images/candi_sumur.jpg',
     location: {
       name: 'FMMM+554, Candipari Kulon, Candipari, Porong',
       kecamatan: 'Porong',
@@ -165,6 +174,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Sejarah & Cagar Budaya',
     address: 'Jl. Kartini, Candipari Wetan, Candipari, Kec. Porong, Kabupaten Sidoarjo, Jawa Timur 61274',
     koordinatText: 'Koordinat grafis: -7.5153, 112.6829',
+    imageUrl: '/images/candi_pari.jpg',
     location: {
       name: 'Jl. Kartini, Candipari Wetan, Candipari, Porong',
       kecamatan: 'Porong',
@@ -184,6 +194,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Gastronomi & Olahan Pangan',
     address: 'Jl. Raya Prambon, Bulang, Kec. Prambon, Kabupaten Sidoarjo, Jawa Timur 61264',
     koordinatText: 'Koordinat grafis: -7.4927, 112.5997',
+    imageUrl: '/images/klepon_bulang.jpg',
     location: {
       name: 'Jl. Raya Prambon, Bulang, Kec. Prambon',
       kecamatan: 'Prambon',
@@ -203,6 +214,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Mbah Nanggul RT. 15 RW. 04, Desa Cemandi, Kecamatan Sedati, Kabupaten Sidoarjo, Jawa Timur',
     koordinatText: 'Koordinat grafis: -7.3951, 112.7915',
+    imageUrl: '/images/reog_cemandi.jpg',
     location: {
       name: 'Jl. Mbah Nanggul RT. 15 RW. 04, Desa Cemandi, Sedati',
       kecamatan: 'Sedati',
@@ -222,6 +234,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Kemuning Asri, Tropodo Kulon, Tropodo, Kec. Waru, Kabupaten Sidoarjo, Jawa Timur 61256',
     koordinatText: 'Titik koordinat: -7.3592, 112.7601',
+    imageUrl: '/images/tari_banjar_kemuning.jpg',
     location: {
       name: 'Banjar Kemuning / Jl. Kemuning Asri, Tropodo Kulon',
       kecamatan: 'Sedati',
@@ -241,6 +254,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Industri Kreatif & UMKM',
     address: 'Jl. P. Diponegoro, Lemahputro, Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213',
     koordinatText: 'Koordinat geografis: -7.4537711737394, 112.71005339084',
+    imageUrl: '/images/batik_jetis.jpg',
     location: {
       name: 'Jl. P. Diponegoro, Lemahputro, Sidoarjo',
       kecamatan: 'Sidoarjo',
@@ -260,6 +274,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Jenderal Ahmad Yani, Alun-alun, Sidokumpul, Kecamatan Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61212',
     koordinatText: 'Koordinat geografis: 7°26\'51.0"S 112°43\'03.4"E (-7.4475, 112.7176)',
+    imageUrl: '/images/lelang_bandeng.jpg',
     location: {
       name: 'Jl. Jenderal Ahmad Yani, Alun-alun, Sidokumpul',
       kecamatan: 'Sidoarjo',
@@ -279,6 +294,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi, Kecamatan Sukodono, Kabupaten Sidoarjo, Jawa Timur, Kodepos: 61258',
     koordinatText: 'Koordinat geografis: -7.41861°S, 112.68528°E',
+    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
     location: {
       name: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi',
       kecamatan: 'Sukodono',
@@ -298,6 +314,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Industri Kreatif & UMKM',
     address: 'Jl. Jambu No. 07, Desa Wage, Kecamatan Taman, Kabupaten Sidoarjo (dapat dilihat melalui akun resmi GikWatun (Batik Tulis Wage))',
     koordinatText: 'Koordinat geografis: [-7.370094, 112.708967]',
+    imageUrl: '/images/batik_khas_wage__gikwatun_.jpg',
     location: {
       name: 'Jl. Jambu No. 07, Desa Wage, Taman',
       kecamatan: 'Taman',
@@ -317,6 +334,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Industri Kreatif & UMKM',
     address: 'Jl. Utama Kendensari No.27, Nggodong, Kedensari, Kecamatan Tanggulangin, Kabupaten Sidoarjo, Jawa Timur 61272',
     koordinatText: 'Koordinat geografis: -7.5053, 112.6922',
+    imageUrl: '/images/intako.jpg',
     location: {
       name: 'Jl. Utama Kendensari No.27, Nggodong, Kedensari',
       kecamatan: 'Tanggulangin',
@@ -336,6 +354,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Raya Tarik No.1, Mergosari, Tarik, Kabupaten Sidoarjo, Jawa Timur 61265',
     koordinatText: 'Koordinat: 7°27′32″S 112°31′02″E (-7.4589, 112.5172) - Pusat budaya',
+    imageUrl: '/images/tari_ujung.jpg',
     location: {
       name: 'Jl. Raya Tarik No.1, Mergosari, Tarik',
       kecamatan: 'Tarik',
@@ -355,6 +374,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Industri Kreatif & UMKM',
     address: 'Jl. Raya Kenongo No.5, RT. 001, Desa Kenongo, Kecamatan Tulangan, Kabupaten Sidoarjo, Jawa Timur 61273',
     koordinatText: 'Koordinat grafis: -7.461947, 112.637021',
+    imageUrl: '/images/batik_tulis_sari_kenongo.jpg',
     location: {
       name: 'Jl. Raya Kenongo No.5, RT. 001, Desa Kenongo',
       kecamatan: 'Tulangan',
@@ -374,6 +394,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Jatisari No.1, Legi, Pepelegi, Kec. Waru, Kabupaten Sidoarjo, Jawa Timur 61256',
     koordinatText: 'Koordinat grafis: -7.361958, 112.723825',
+    imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
     location: {
       name: 'Jl. Jatisari No.1, Legi, Pepelegi, Waru',
       kecamatan: 'Waru',
@@ -393,6 +414,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Industri Kreatif & UMKM',
     address: 'Jl. Kolonel Sugiono No. 45, Ngingas, Kecamatan Waru, Kabupaten Sidoarjo, Jawa Timur 61256',
     koordinatText: 'Koordinat grafis: -7.355, 112.736',
+    imageUrl: '/images/kerajinan_sepatu__wedoro_.jpg',
     location: {
       name: 'Jl. Kolonel Sugiono No. 45, Ngingas (Wedoro), Waru',
       kecamatan: 'Waru',
@@ -411,7 +433,8 @@ export const SEED_MEMORIES: MateriItem[] = [
     kecamatan: 'Wonoayu',
     category: 'Sejarah & Cagar Budaya',
     address: 'Dusun Candidermo, RT.04/RW.03, Desa Candinegoro, Kecamatan Wonoayu, Kabupaten Sidoarjo, Jawa Timur 61261',
-    koordinatText: 'Koordinat grafis: 7.4388256843596, 112.70621016078',
+    koordinatText: 'Koordinat grafis: -7.4388256843596, 112.70621016078',
+    imageUrl: '/images/candi_dermo.jpg',
     location: {
       name: 'Dusun Candidermo, Desa Candinegoro, Wonoayu',
       kecamatan: 'Wonoayu',

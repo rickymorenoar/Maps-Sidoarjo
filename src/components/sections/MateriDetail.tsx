@@ -190,6 +190,43 @@ export const MateriDetail: React.FC<MateriDetailProps> = ({
           </div>
         </motion.header>
 
+        {/* Foto Dokumentasi Materi (Responsif) */}
+        {materi.imageUrl && (
+          <motion.div
+            initial={shouldReduceMotion ? {} : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-8"
+          >
+            <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] max-h-[400px] rounded-md overflow-hidden border border-line shadow-xs bg-[#EFE9DF] group">
+              <img
+                src={materi.imageUrl}
+                alt={materi.title}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                onError={(e) => {
+                  // Fallback jika koneksi gambar gagal
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between gap-3 text-paper">
+                <div>
+                  <span className="inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-clay/90 rounded-xs mb-1">
+                    Dokumentasi {materi.kecamatan}
+                  </span>
+                  <p className="font-serif text-sm sm:text-lg font-bold text-paper drop-shadow-sm line-clamp-1">
+                    {materi.title}
+                  </p>
+                </div>
+                <span className="text-[11px] text-paper/80 font-mono hidden sm:inline-block bg-black/30 backdrop-blur-xs px-2 py-1 rounded">
+                  {materi.category}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Uraian Konten Utama */}
         <motion.section
           initial={shouldReduceMotion ? {} : { opacity: 0, y: 20 }}

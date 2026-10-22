@@ -141,6 +141,26 @@ export const MemoryList: React.FC<MemoryListProps> = ({
                   </span>
                 </div>
 
+                {mem.imageUrl && (
+                  <div
+                    onClick={() => onSelectMemory(mem)}
+                    className="w-full h-28 sm:h-32 mb-2 rounded-sm overflow-hidden bg-black/5 relative cursor-pointer group"
+                  >
+                    <img
+                      src={mem.imageUrl}
+                      alt={mem.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-1.5">
+                      <span className="text-[10px] text-paper font-medium">Klik untuk fokus peta</span>
+                    </div>
+                  </div>
+                )}
+
                 <h4
                   onClick={() => {
                     onSelectMemory(mem);
