@@ -10,7 +10,6 @@ export const About: React.FC = () => {
         <div className="max-w-2xl mb-14 md:mb-20">
           <Reveal>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-clay/10 text-clay border border-clay/25 text-xs font-medium tracking-wide mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-clay"></span>
               <span>Tentang Platform</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-4">

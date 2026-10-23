@@ -77,7 +77,6 @@ export const Home: React.FC = () => {
         
         {/* Badge Pengenal */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/25 text-[11px] sm:text-xs font-medium tracking-wide mb-3 sm:mb-4">
-          <span className="w-1.5 h-1.5 rounded-full bg-tambak animate-pulse"></span>
           <span>Peta Basis Data Materi 18 Kecamatan Sidoarjo</span>
         </div>
 

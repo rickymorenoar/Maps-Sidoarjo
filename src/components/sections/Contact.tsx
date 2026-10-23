@@ -130,8 +130,7 @@ export const Contact: React.FC = () => {
 
         <div className="max-w-2xl mx-auto text-center mb-12">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/25 text-xs font-medium tracking-wide mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-tambak"></span>
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/25 text-xs font-medium tracking-wide mb-3"> 
               <span>Hubungi Pengelola</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-3">

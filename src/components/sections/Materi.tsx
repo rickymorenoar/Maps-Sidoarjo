@@ -19,7 +19,6 @@ export const Materi: React.FC<MateriProps> = ({ onOpenDetail }) => {
         <div className="max-w-3xl mb-8 md:mb-12">
           <Reveal>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/20 text-xs font-medium tracking-wide mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-tambak"></span>
               <span>Basis Data Materi Wilayah Sidoarjo</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-4xl font-bold text-ink tracking-tight mb-2.5">
