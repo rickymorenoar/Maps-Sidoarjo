@@ -32,14 +32,26 @@ export const Home: React.FC = () => {
     },
   };
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const header = document.querySelector('header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 64;
+      const currentScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const targetTop = el.getBoundingClientRect().top + currentScrollY - headerHeight;
+      window.scrollTo({
+        top: Math.max(0, Math.round(targetTop)),
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const scrollToMateri = () => {
-    const el = document.getElementById('materi');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToSection('materi');
   };
 
   const scrollToAbout = () => {
-    const el = document.getElementById('about');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToSection('about');
   };
 
   return (

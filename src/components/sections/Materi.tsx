@@ -12,7 +12,7 @@ export interface MateriProps {
  */
 export const Materi: React.FC<MateriProps> = ({ onOpenDetail }) => {
   return (
-    <section id="materi" className="py-16 md:py-24 border-t border-line bg-paper">
+    <section id="materi" className="pt-8 pb-16 md:pt-14 md:pb-24 min-h-[calc(100vh-4rem)] border-t border-line bg-paper">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header Section Materi */}

@@ -47,39 +47,71 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+const SECTION_IDS = ['home', 'materi', 'about', 'contact'];
+
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const activeSection = useActiveSection(['home', 'materi', 'about', 'contact'], 'home');
+  const activeSection = useActiveSection(SECTION_IDS, 'home');
 
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
 
-    const performScroll = () => {
-      if (id === 'home') {
+    // Lepas fokus agar tidak ada touch/focus lock di mobile
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
+    const scrollToSection = (targetId: string) => {
+      if (targetId === 'home') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        try {
+          window.history.pushState(null, '', window.location.pathname);
+        } catch (_) {}
         return;
       }
-      const element = document.getElementById(id);
+
+      const element = document.getElementById(targetId);
       if (element) {
-        const topOffset = 64;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + (window.pageYOffset || window.scrollY || 0) - topOffset;
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.getBoundingClientRect().height : 64;
+        const currentScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const elementTop = element.getBoundingClientRect().top + currentScrollY;
+        // Pendaratan presisi tepat di batas paling atas section di bawah navbar
+        const targetScrollTop = Math.max(0, Math.round(elementTop - headerHeight));
+
         window.scrollTo({
-          top: offsetPosition,
+          top: targetScrollTop,
           behavior: 'smooth',
         });
+
+        try {
+          window.history.pushState(null, '', `#${targetId}`);
+        } catch (_) {}
       }
     };
 
-    // Jika sedang di halaman detail materi, kembalikan ke beranda lalu scroll ke target
+    // Jika sedang di halaman detail materi, kembali ke beranda lalu scroll begitu halaman utama siap
     if (window.location.hash.startsWith('#/materi/')) {
       window.location.hash = id === 'home' ? '' : `#${id}`;
-      setTimeout(performScroll, 80);
+
+      let attempts = 0;
+      const checkTimer = setInterval(() => {
+        attempts++;
+        const targetElement = id === 'home' ? document.getElementById('home') : document.getElementById(id);
+        if (targetElement) {
+          clearInterval(checkTimer);
+          scrollToSection(id);
+        } else if (attempts >= 30) {
+          clearInterval(checkTimer);
+          scrollToSection(id);
+        }
+      }, 20);
       return;
     }
 
-    performScroll();
+    // Eksekusi scroll langsung
+    scrollToSection(id);
   };
 
   return (
@@ -148,7 +180,7 @@ export const Navbar: React.FC = () => {
               aria-label={mobileMenuOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
               aria-expanded={mobileMenuOpen}
             >
-              <div className="w-5 h-4 flex flex-col justify-between items-center relative">
+              <div className="w-5 h-4 flex flex-col justify-between items-center relative pointer-events-none">
                 <span
                   className={`w-5 h-0.5 bg-current rounded-full transform transition-all duration-300 ease-in-out ${
                     mobileMenuOpen ? 'rotate-45 translate-y-1.5 bg-clay' : ''
@@ -169,43 +201,25 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown: Melayang / Overlay menimpa elemen lain tanpa layout shift */}
+        {/* Mobile Menu Dropdown: Melayang / Overlay menimpa elemen lain tanpa stuck */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="md:hidden absolute top-full left-0 right-0 w-full overflow-hidden bg-paper/98 backdrop-blur-xl border-b border-line shadow-2xl z-[100]"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.16, ease: 'easeOut' }}
+              className="md:hidden absolute top-full left-0 right-0 w-full bg-paper/98 backdrop-blur-xl border-b border-line shadow-2xl z-[100]"
             >
-              <motion.div
-                initial="closed"
-                animate="open"
-                exit="closed"
-                variants={{
-                  open: {
-                    transition: { staggerChildren: 0.05, delayChildren: 0.05 },
-                  },
-                  closed: {
-                    transition: { staggerChildren: 0.03, staggerDirection: -1 },
-                  },
-                }}
-                className="px-4 py-3 space-y-1.5"
-              >
+              <div className="px-4 py-3 space-y-1.5">
                 {NAV_ITEMS.map((item) => {
                   const isActive = activeSection === item.id;
                   return (
-                    <motion.a
+                    <a
                       key={item.id}
                       href={`#${item.id}`}
                       onClick={(e) => handleNavClick(e, item.id)}
-                      variants={{
-                        open: { opacity: 1, x: 0, y: 0 },
-                        closed: { opacity: 0, x: -12, y: -4 },
-                      }}
-                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                      className={`flex items-center px-3.5 py-3 rounded-lg text-sm font-medium transition-all duration-200 cursor-pointer ${
+                      className={`flex items-center px-3.5 py-3 rounded-lg text-sm font-medium transition-colors cursor-pointer select-none ${
                         isActive
                           ? 'bg-clay/15 text-clay font-bold shadow-xs translate-x-1'
                           : 'text-ink/80 hover:bg-black/5 hover:text-ink active:scale-[0.98]'
@@ -220,10 +234,10 @@ export const Navbar: React.FC = () => {
                         </span>
                         <span className="text-base tracking-tight">{item.label}</span>
                       </div>
-                    </motion.a>
+                    </a>
                   );
                 })}
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -236,9 +250,9 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.12 }}
             onClick={() => setMobileMenuOpen(false)}
-            className="md:hidden fixed inset-0 top-16 bg-black/40 backdrop-blur-xs z-[90] pointer-events-auto"
+            className="md:hidden fixed inset-0 top-16 bg-black/40 backdrop-blur-xs z-[90] cursor-pointer"
             aria-hidden="true"
           />
         )}

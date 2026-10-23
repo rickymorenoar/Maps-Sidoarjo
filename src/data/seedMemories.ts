@@ -94,7 +94,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Sejarah & Cagar Budaya',
     address: 'Jl. Gajah Mada No.19, Pekauman, Kec. Sidoarjo, Kabupaten Sidoarjo, Jawa Timur 61213',
     koordinatText: 'Koordinat grafis: -7.4523, 112.7169',
-    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/images/jabon.jpg',
     location: {
       name: 'Dusun Kauman di Desa Kedungcangkring, Jabon',
       kecamatan: 'Jabon',
@@ -294,7 +294,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi, Kecamatan Sukodono, Kabupaten Sidoarjo, Jawa Timur, Kodepos: 61258',
     koordinatText: 'Koordinat geografis: -7.41861°S, 112.68528°E',
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/images/Sukodono.jpg',
     location: {
       name: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi',
       kecamatan: 'Sukodono',
@@ -394,7 +394,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Jatisari No.1, Legi, Pepelegi, Kec. Waru, Kabupaten Sidoarjo, Jawa Timur 61256',
     koordinatText: 'Koordinat grafis: -7.361958, 112.723825',
-    imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/images/Waru.jpeg',
     location: {
       name: 'Jl. Jatisari No.1, Legi, Pepelegi, Waru',
       kecamatan: 'Waru',

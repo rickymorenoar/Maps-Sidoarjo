@@ -3,7 +3,7 @@ import { Reveal } from '../ui/Reveal';
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-20 md:py-28 border-t border-line bg-[#FAF7F2]">
+    <section id="about" className="pt-8 pb-16 md:pt-14 md:pb-24 min-h-[calc(100vh-4rem)] border-t border-line bg-[#FAF7F2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header Section */}

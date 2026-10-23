@@ -20,7 +20,7 @@ export const SIDOARJO_BOUNDS: [[number, number], [number, number]] = [
 export const MIN_ZOOM = 11; // Mencegah zoom out keluar dari area Sidoarjo
 export const MAX_ZOOM = 18;
 
-export const STORAGE_KEY_MATERI = 'sidoarjo_materi_kecamatan_v7';
+export const STORAGE_KEY_MATERI = 'sidoarjo_materi_kecamatan_v8';
 export const STORAGE_KEY_MEMORIES = STORAGE_KEY_MATERI;
 
 /**
