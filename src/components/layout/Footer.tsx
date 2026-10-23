@@ -10,7 +10,6 @@ export const Footer: React.FC = () => {
           
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-clay"></span>
               <h3 className="font-serif font-bold text-base text-ink">
                 Peta Materi Sidoarjo
               </h3>
