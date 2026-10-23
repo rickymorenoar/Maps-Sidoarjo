@@ -9,13 +9,24 @@ import { Footer } from './components/layout/Footer';
 import { MateriItem } from './types/memory';
 import { SEED_MEMORIES } from './data/seedMemories';
 
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { STORAGE_KEY_MATERI } from './lib/constants';
+
 
 export default function App(): React.ReactElement {
-  const [memories] = useLocalStorage<MateriItem[]>(STORAGE_KEY_MATERI, SEED_MEMORIES);
-  const activeMemories = memories && memories.length >= SEED_MEMORIES.length ? memories : SEED_MEMORIES;
+  const activeMemories = SEED_MEMORIES;
   const [selectedMateriDetail, setSelectedMateriDetail] = useState<MateriItem | null>(null);
+
+  // Bersihkan cache localStorage lama agar data foto selalu menggunakan dataset seed terbaru
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        Object.keys(window.localStorage).forEach((key) => {
+          if (key.startsWith('sidoarjo_')) {
+            window.localStorage.removeItem(key);
+          }
+        });
+      } catch (_) {}
+    }
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -68,7 +79,7 @@ export default function App(): React.ReactElement {
             materi={selectedMateriDetail}
             onBack={handleBackToMap}
             onSelectOtherMateri={handleOpenDetail}
-            allMemories={memories}
+            allMemories={activeMemories}
           />
         ) : (
           /* Halaman Utama: Home | Materi (Peta Terkunci Sidoarjo) | About | Contact */
