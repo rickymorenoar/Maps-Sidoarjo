@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
 
         <div className="border-t border-line/60 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-ink/60 gap-3">
           <p>© {currentYear} Peta Materi Sidoarjo. Basis Data Edukasi 18 Kecamatan.</p>
-          <p className="italic">18 Kecamatan • Materi Terpetakan • Edukasi Terpadu</p>
+          <p className="italic">18 Kecamatan • Materi Terpetakan • Edukasi Terpadu • SMP Negeri 1 Gedangan</p>
         </div>
       </div>
     </footer>
