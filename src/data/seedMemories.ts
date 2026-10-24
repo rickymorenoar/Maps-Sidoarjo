@@ -294,7 +294,7 @@ export const SEED_MEMORIES: MateriItem[] = [
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi, Kecamatan Sukodono, Kabupaten Sidoarjo, Jawa Timur, Kodepos: 61258',
     koordinatText: 'Koordinat geografis: -7.41861°S, 112.68528°E',
-    imageUrl: '/images/Sukodono.jpg',
+    imageUrl: '/images/sukodono_duduk_pademi.jpg',
     location: {
       name: 'Desa Anggaswangi, Sukodono',
       kecamatan: 'Sukodono',

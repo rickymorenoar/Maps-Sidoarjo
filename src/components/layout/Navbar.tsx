@@ -49,6 +49,27 @@ const NAV_ITEMS: NavItem[] = [
 
 const SECTION_IDS = ['home', 'materi', 'about', 'contact'];
 
+// Animasi muncul berurutan satu per satu (Stagger Waterfall) khusus mobile navbar
+const mobileItemVariants = {
+  hidden: {
+    opacity: 0,
+    x: -24,
+    scale: 0.95,
+  },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      delay: 0.05 + i * 0.06,
+      type: 'spring',
+      stiffness: 340,
+      damping: 24,
+      mass: 0.8,
+    },
+  }),
+};
+
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const activeSection = useActiveSection(SECTION_IDS, 'home');
@@ -212,29 +233,36 @@ export const Navbar: React.FC = () => {
               className="md:hidden absolute top-full left-0 right-0 w-full bg-paper/98 backdrop-blur-xl border-b border-line shadow-2xl z-[100]"
             >
               <div className="px-4 py-3 space-y-1.5">
-                {NAV_ITEMS.map((item) => {
+                {NAV_ITEMS.map((item, index) => {
                   const isActive = activeSection === item.id;
                   return (
-                    <a
+                    <motion.div
                       key={item.id}
-                      href={`#${item.id}`}
-                      onClick={(e) => handleNavClick(e, item.id)}
-                      className={`flex items-center px-3.5 py-3 rounded-lg text-sm font-medium transition-colors cursor-pointer select-none ${
-                        isActive
-                          ? 'bg-clay/15 text-clay font-bold shadow-xs translate-x-1'
-                          : 'text-ink/80 hover:bg-black/5 hover:text-ink active:scale-[0.98]'
-                      }`}
-                      aria-current={isActive ? 'page' : undefined}
+                      custom={index}
+                      initial="hidden"
+                      animate="visible"
+                      variants={mobileItemVariants}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className={`p-1.5 rounded-md transition-colors ${
-                          isActive ? 'bg-clay text-paper' : 'bg-black/5 text-ink/70'
-                        }`}>
-                          {item.icon}
-                        </span>
-                        <span className="text-base tracking-tight">{item.label}</span>
-                      </div>
-                    </a>
+                      <a
+                        href={`#${item.id}`}
+                        onClick={(e) => handleNavClick(e, item.id)}
+                        className={`flex items-center px-3.5 py-3 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer select-none ${
+                          isActive
+                            ? 'bg-clay/15 text-clay font-bold shadow-xs translate-x-1'
+                            : 'text-ink/80 hover:bg-black/5 hover:text-ink active:scale-[0.98]'
+                        }`}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`p-1.5 rounded-md transition-colors ${
+                            isActive ? 'bg-clay text-paper shadow-xs' : 'bg-black/5 text-ink/70'
+                          }`}>
+                            {item.icon}
+                          </span>
+                          <span className="text-base tracking-tight">{item.label}</span>
+                        </div>
+                      </a>
+                    </motion.div>
                   );
                 })}
               </div>
