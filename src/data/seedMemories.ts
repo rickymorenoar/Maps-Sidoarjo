@@ -289,20 +289,20 @@ export const SEED_MEMORIES: MateriItem[] = [
   // 15. SUKODONO
   {
     id: 'sukodono-desa-anggaswangi',
-    title: 'Desa Anggaswangi',
+    title: 'Tradisi Duduk Pademi di Desa Anggaswangi',
     kecamatan: 'Sukodono',
     category: 'Seni Budaya & Tradisi',
     address: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi, Kecamatan Sukodono, Kabupaten Sidoarjo, Jawa Timur, Kodepos: 61258',
     koordinatText: 'Koordinat geografis: -7.41861°S, 112.68528°E',
     imageUrl: '/images/Sukodono.jpg',
     location: {
-      name: 'Jl. Putra Bangsa RT 09 RW 05, Desa Anggaswangi',
+      name: 'Desa Anggaswangi, Sukodono',
       kecamatan: 'Sukodono',
       lat: -7.41861,
       lng: 112.68528,
     },
-    content: 'Desa Anggaswangi terletak di Kecamatan Sukodono, Kabupaten Sidoarjo, Jawa Timur. Penduduk Desa Anggaswangi menerapkan prinsip persatuan lewat aktivitas gotong royong yang menunjukkan rasa kebersamaan, kepedulian terhadap sesama, dan kolaborasi di antara warga dalam upaya membangun lingkungan desa yang bersih, sehat, serta nyaman (Amirulloh et al., 2023).',
-    source: 'Amirulloh et al., 2023.',
+    content: 'Di Desa Anggaswangi, Kecamatan Sukodono, terdapat tradisi duduk pademi, yaitu tradisi berkumpulnya masyarakat secara bersama-sama di suatu tempat (seperti masjid, musala, atau rumah warga) untuk duduk bersama melakukan doa, zikir, dan pembacaan kitab suci guna memohon keselamatan, kesembuhan, serta perlindungan dari Allah SWT dari marabahaya atau wabah penyakit (pagebluk).',
+    source: 'Tradisi lokal Desa Anggaswangi, Sukodono & Amirulloh et al., 2023.',
     createdAt: 1710000015000,
   },
 
