@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <h3 className="font-serif font-bold text-base text-ink">
-                Peta Materi Sidoarjo
+                Edukasi Terpadu di Kabupaten Sidoarjo
               </h3>
             </div>
             <p className="text-xs text-ink/75 leading-relaxed max-w-sm">
@@ -48,8 +48,8 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-line/60 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-ink/60 gap-3">
-          <p>© {currentYear} Peta Materi Sidoarjo. Basis Data Edukasi 18 Kecamatan.</p>
-          <p className="italic">18 Kecamatan • Materi Terpetakan • Edukasi Terpadu • SMP Negeri 1 Gedangan</p>
+          <p>© {currentYear} Peta Materi Sidoarjo. Basis Data Edukasi Warisan Budaya Lokal.</p>
+          <p className="italic">18 kecamatan • Edukasi Terpadu • Sidoarjo Memory Map • SMP Negeri 1 Gedangan</p>
         </div>
       </div>
     </footer>

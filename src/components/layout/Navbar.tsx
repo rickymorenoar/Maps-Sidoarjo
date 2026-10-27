@@ -49,23 +49,40 @@ const NAV_ITEMS: NavItem[] = [
 
 const SECTION_IDS = ['home', 'materi', 'about', 'contact'];
 
-// Animasi muncul berurutan satu per satu (Stagger Waterfall) khusus mobile navbar
-const mobileItemVariants = {
-  hidden: {
-    opacity: 0,
-    x: -24,
-    scale: 0.95,
+// Animasi Drawer meluncur masuk dari kiri layar khusus mobile navbar ("memasukkan navbar dari kiri")
+const mobileDrawerVariants = {
+  closed: {
+    x: '-100%',
+    transition: {
+      type: 'spring',
+      damping: 32,
+      stiffness: 320,
+    },
   },
-  visible: (i: number) => ({
+  open: {
+    x: '0%',
+    transition: {
+      type: 'spring',
+      damping: 26,
+      stiffness: 280,
+    },
+  },
+};
+
+// Item navigasi muncul bertahap satu per satu dari kiri ke kanan
+const mobileItemVariants = {
+  closed: {
+    opacity: 0,
+    x: -36,
+  },
+  open: (i: number) => ({
     opacity: 1,
     x: 0,
-    scale: 1,
     transition: {
-      delay: 0.05 + i * 0.06,
+      delay: 0.12 + i * 0.06, // Muncul 1 per 1 dari kiri (Home -> Materi -> About -> Contact)
       type: 'spring',
       stiffness: 340,
       damping: 24,
-      mass: 0.8,
     },
   }),
 };
@@ -222,67 +239,109 @@ export const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown: Melayang / Overlay menimpa elemen lain tanpa stuck */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.16, ease: 'easeOut' }}
-              className="md:hidden absolute top-full left-0 right-0 w-full bg-paper/98 backdrop-blur-xl border-b border-line shadow-2xl z-[100]"
-            >
-              <div className="px-4 py-3 space-y-1.5">
-                {NAV_ITEMS.map((item, index) => {
-                  const isActive = activeSection === item.id;
-                  return (
-                    <motion.div
-                      key={item.id}
-                      custom={index}
-                      initial="hidden"
-                      animate="visible"
-                      variants={mobileItemVariants}
-                    >
-                      <a
-                        href={`#${item.id}`}
-                        onClick={(e) => handleNavClick(e, item.id)}
-                        className={`flex items-center px-3.5 py-3 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer select-none ${
-                          isActive
-                            ? 'bg-clay/15 text-clay font-bold shadow-xs translate-x-1'
-                            : 'text-ink/80 hover:bg-black/5 hover:text-ink active:scale-[0.98]'
-                        }`}
-                        aria-current={isActive ? 'page' : undefined}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className={`p-1.5 rounded-md transition-colors ${
-                            isActive ? 'bg-clay text-paper shadow-xs' : 'bg-black/5 text-ink/70'
-                          }`}>
-                            {item.icon}
-                          </span>
-                          <span className="text-base tracking-tight">{item.label}</span>
-                        </div>
-                      </a>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
 
-      {/* Backdrop semi-transparan saat menu mobile aktif (klik luar untuk tutup) */}
+      {/* Mobile Drawer Navigation: Meluncur masuk dari kiri layar ("memasukkan navbar dari kiri") */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.12 }}
-            onClick={() => setMobileMenuOpen(false)}
-            className="md:hidden fixed inset-0 top-16 bg-black/40 backdrop-blur-xs z-[90] cursor-pointer"
-            aria-hidden="true"
-          />
+          <>
+            {/* Backdrop semi-transparan (klik untuk tutup) */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-xs z-[110] cursor-pointer"
+              aria-hidden="true"
+            />
+
+            {/* Panel Navbar Meluncur Masuk dari Kiri */}
+            <motion.aside
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={mobileDrawerVariants}
+              className="md:hidden fixed inset-y-0 left-0 w-[84%] max-w-xs bg-paper/98 backdrop-blur-2xl border-r border-line shadow-2xl z-[120] flex flex-col justify-between overflow-y-auto"
+              aria-label="Menu Navigasi Mobile"
+            >
+              {/* Bagian Atas Drawer: Logo & Tombol Tutup Silang */}
+              <div>
+                <div className="h-16 px-5 border-b border-line flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="/logo.webp"
+                      alt="Logo Sekolah"
+                      className="w-9 h-9 object-contain rounded-md drop-shadow-xs"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/logo-sekolah.png';
+                      }}
+                    />
+                    <span className="font-serif font-bold text-base text-ink tracking-tight">
+                      Sidoarjo Memory
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="w-8 h-8 flex items-center justify-center rounded-lg text-ink/70 hover:text-ink hover:bg-black/5 active:scale-95 transition-all cursor-pointer"
+                    aria-label="Tutup menu navigasi"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Daftar Item Navigasi yang Muncul Berurutan dari Kiri */}
+                <div className="p-4 space-y-2">
+                  <div className="px-2 py-1 text-[11px] font-semibold uppercase tracking-wider text-ink/40">
+                    Navigasi Halaman
+                  </div>
+                  {NAV_ITEMS.map((item, index) => {
+                    const isActive = activeSection === item.id;
+                    return (
+                      <motion.div
+                        key={item.id}
+                        custom={index}
+                        initial="closed"
+                        animate="open"
+                        variants={mobileItemVariants}
+                      >
+                        <a
+                          href={`#${item.id}`}
+                          onClick={(e) => handleNavClick(e, item.id)}
+                          className={`flex items-center px-3.5 py-3 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer select-none ${
+                            isActive
+                              ? 'bg-clay text-paper font-semibold shadow-sm translate-x-1'
+                              : 'text-ink/80 hover:bg-black/5 hover:text-ink active:scale-[0.98]'
+                          }`}
+                          aria-current={isActive ? 'page' : undefined}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className={`p-1.5 rounded-lg transition-colors ${
+                              isActive ? 'bg-white/20 text-paper' : 'bg-black/5 text-ink/70'
+                            }`}>
+                              {item.icon}
+                            </span>
+                            <span className="text-base tracking-tight">{item.label}</span>
+                          </div>
+                        </a>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Bagian Bawah Drawer: Catatan Sidoarjo */}
+              <div className="p-4 border-t border-line/60 bg-black/[0.02]">
+                <p className="text-[11px] text-ink/50 text-center">
+                  18 Kecamatan • Sidoarjo Memory Map
+                </p>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
     </>

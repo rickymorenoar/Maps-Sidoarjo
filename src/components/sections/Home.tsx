@@ -77,7 +77,7 @@ export const Home: React.FC = () => {
         
         {/* Badge Pengenal */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/25 text-[11px] sm:text-xs font-medium tracking-wide mb-3 sm:mb-4">
-          <span>Peta Basis Data Materi 18 Kecamatan Sidoarjo</span>
+          <span>Peta Basis Data Warisan Budaya Lokal Sidoarjo</span>
         </div>
 
         {/* Judul Utama yang proporsional agar muat 1 layar */}
@@ -99,7 +99,7 @@ export const Home: React.FC = () => {
               Arsip Pengetahuan Wilayah
             </motion.span>
             <motion.span variants={lineVariants} className="block text-ink">
-              di 18 Kecamatan Sidoarjo.
+              di Kabupaten Sidoarjo.
             </motion.span>
           </motion.h1>
         )}
@@ -131,7 +131,7 @@ export const Home: React.FC = () => {
                 d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
               />
             </svg>
-            <span>Jelajahi Peta Materi</span>
+            <span>Jelajahi Peta Budaya</span>
           </Button>
 
           <Button

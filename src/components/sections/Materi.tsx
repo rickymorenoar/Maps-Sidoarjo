@@ -19,10 +19,10 @@ export const Materi: React.FC<MateriProps> = ({ onOpenDetail }) => {
         <div className="max-w-3xl mb-8 md:mb-12">
           <Reveal>
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-tambak/10 text-tambak border border-tambak/20 text-xs font-medium tracking-wide mb-3">
-              <span>Basis Data Materi Wilayah Sidoarjo</span>
+              <span>Materi Edukasi Budaya Lokal Sidoarjo</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-4xl font-bold text-ink tracking-tight mb-2.5">
-              Peta Materi Edukasi 18 Kecamatan Sidoarjo
+              Peta Basis Data Warisan Budaya Lokal Sidoarjo
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-ink/75 leading-relaxed font-sans">
               Peta dikunci khusus untuk wilayah Kabupaten Sidoarjo. Klik penanda di peta atau item pada daftar di samping untuk membuka halaman materi lengkap.

@@ -13,7 +13,7 @@ export const About: React.FC = () => {
               <span>Tentang Platform</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-4">
-              Pusat Materi Edukasi Terpadu di 18 Kecamatan
+              Pusat Materi Edukasi Terpadu di Kabupaten Sidoarjo
             </h2>
             <p className="text-sm sm:text-base text-ink/75 leading-relaxed font-sans">
               Platform ini dirancang khusus untuk menyimpan, mengkategorikan, dan memvisualisasikan materi pembelajaran, data sejarah, potensi ekonomi, dan karakteristik lingkungan di setiap kecamatan Kabupaten Sidoarjo.
